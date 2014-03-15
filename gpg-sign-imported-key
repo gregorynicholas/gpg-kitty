@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#
+# $$ GPGKITTY $$
+# $$ cheap gpg magic for sexual powress $$
+#
+# sign an imported public key with your secret key
+#
+
+. ./gpg-kitty
+
+if [ -z "$1" ]; then
+  usage; exit 1
+fi
+
+echo "
+  \$\$\$
+  magin kitty sp happy. you signing key: $1
+  \$\$\$
+
+"
+
+gpg --list-sigs
+# gpg --check-sigs
+
+gpg --sign-key "$1"

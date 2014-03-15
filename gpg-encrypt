@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#
+# $$ GPGKITTY $$
+# $$ cheap gpg magic for sexual powress $$
+#
+# encrypt a message text file
+#
+
+. ./gpg-kitty
+
+recipientuuid="$1"
+sourcefile="$2"
+outputfile="$sourcefile.gpg"
+
+if [ -z "$recipientuuid" ]; then
+  usage; exit 1
+fi
+if [ -z "$sourcefile" ]; then
+  usage; exit 1
+fi
+if [ -z "$outputfile" ]; then
+  usage; exit 1
+fi
+
+echo "
+  \$\$\$
+  magic kitty like purr..
+  \$\$\$
+"
+
+# encrypt the file contents
+gpg --encrypt --armor \
+    --recipient "$recipientuuid" \
+    --output "$outputfile" \
+    "$sourcefile"
+
+
+# display the encrypted string for visual confirmation..
+cat "$outputfile"
+# copy the contents to clipboard
+cat "$outputfile" | pbcopy
+
+# cleanup..
+rm -rf "$sourcefile"
+
+
+echo "
+  \$\$\$
+  magic kitty pgp your message:
+
+      clipboard: you now paste from clipboard anywaaah
+      filename: $outputfile
+
+  \$\$\$
+"

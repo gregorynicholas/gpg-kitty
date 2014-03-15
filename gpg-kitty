@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+usage() {
+  echo "
+$$ GPGKITTY $$
+$$ cheap gpg magic for sexual powress $$
+
+command line friendly app for gpg.
+copyright(c) 2014 gregorynicholas.
+github.com/gregorynicholas/gpgkitty
+
+
+USAGE:
+------
+
+step 1. copy a public key to your clipboard. the key is just a string with
+contents similar to this format:
+
+    -----BEGIN PGP PUBLIC KEY BLOCK-----
+    Version: GnuPG v2.0.22 (MingW32)
+
+    mQENBFMFPl0BCACteoNVniGEvshcUlP2RP0hSIpHfaPUoa648cM8CgaemOIPkjcp
+    ...
+    =ED7R
+    -----END PGP PUBLIC KEY BLOCK-----
+
+
+
+step 2. verify + import the public key from your clipboard:
+
+    $ ./gpg-import-public-key
+
+
+
+step 3. sign the key:
+
+    $ gpg --edit-key <uuid or email>
+      > fpr [ENTER]
+      > sign [ENTER]
+      > check [ENTER]
+      > quit [ENTER]
+
+
+-----
+now you're ready to encrpyt files + messages for this fuck.
+-----
+
+
+
+step 4. encrypt your message or documents. if you are sending a message, write
+the contents of your message to a new <.txt> file.  for this example, create
+the file: `message-01.txt`.
+
+    $ ./gpg-encrypt <uuid or email> message-01.txt
+
+
+
+DEFINITIONS:
+
+keyname - can be a key recipient (either uuid or email)
+
+
+COMMAND REFERENCE:
+------------------
+
+gpg-gen-key            : generate a new public/private key
+    $ gpg-gen-key
+
+gpg-import-public-key  : verify + import a public key from the clipboard
+    $ gpg-import-public-key
+
+gpg-import-key         : import a public key
+    $ gpg-import-key  <uuid or email>
+
+gpg-sign-imported-key  : sign an imported public key with your secret key
+    $ gpg-sign-imported-key  <uuid or email>
+
+gpg-create-message     : seed a new message text file
+    $ gpg-create-message
+
+gpg-encrypt            : encrypt a message text file for a recipent
+    $ gpg-encrypt  <uuid or email>  <input-filename>
+
+gpg-decrypt            : decrypt a message file
+    $ gpg-decrypt  <uuid or email>
+
+"
+  exit 1
+}

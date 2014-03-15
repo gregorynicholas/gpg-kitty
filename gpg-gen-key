@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#
+# $$ GPGKITTY $$
+# $$ cheap gpg magic for sexual powress $$
+#
+# install + setup gpg for osx
+# see: http://support.gpgtools.org/kb/how-to/first-steps-where-do-i-start-where-do-i-begin
+#
+
+. ./gpg-kitty
+
+if [ -z "$1" ]; then
+  usage; exit 1
+fi
+
+echo "
+generating key.  quick start entries:
+
+  1: enter 1
+  2: enter 2048
+  3: enter 0, y
+  4: name: heinrich heine
+  5: email: heinrichh@duesseldorf.de
+  6: comment: der dichter
+  7: enter O
+  8: <create passphrase>
+"
+
+gpg --gen-key
+
+# list the keys for the user
+gpg --list-keys

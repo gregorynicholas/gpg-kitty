@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# $$ GPGKITTY $$
+# $$ cheap gpg magic for sexual powress $$
+#
+# create a message as a text file
+#
+
+. ./gpg-kitty
+
+
+# TODO

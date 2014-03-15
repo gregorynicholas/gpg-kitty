@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# $$ GPGKITTY $$
+# $$ cheap gpg magic for sexual powress $$
+#
+# verify + import a public key from the clipboard
+#
+
+
+key_file="key.asc"
+key="$(pbpaste)"              # grap the key from the clipboard..
+# key="${key//\"/}"           # OPTIONAL: remove quotations..
+echo "$key" > $key_file       # output the clipboard to a temp file..
+gpg --verify $key_file        # verify the key..
+./gpg-import-key $key_file    # import the key..
+rm -rf $key_file              # remove the temp file..
+
+
+# TODO: parse the last email in the --list string, use as param to continue..
+
+# continue onto key signing..
+# ./gpg-sign-imported-key $key_file

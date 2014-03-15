@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# $$ GPGKITTY $$
+# $$ cheap gpg magic for sexual powress $$
+#
+# list out gpg keys
+#
+
+. ./gpg-kitty
+
+
+gpg --list-keys

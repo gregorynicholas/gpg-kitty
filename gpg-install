@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+# $$ GPGKITTY $$
+# $$ cheap gpg magic for sexual powress $$
+#
+# install + setup gpg for osx
+#
+
+dmg_url="https://releases.gpgtools.org/GPG%20Suite%20-%202013.10.22.dmg"
+dmg_name="GPG Suite - 2013.10.22.dmg"
+volume_path="/Volumes/GPG Suite"
+pkg_path="$volume_path/Install.pkg"
+target_path="/Applications/gpg-kitty"
+target_volume="/Volumes/Macintosh HD"
+
+
+# ensure the target install root is clean..
+if [ -d "$target_path" ]; then
+  rm -rf "$target_path"
+fi
+mkdir "$target_path"
+cd "$target_path"
+
+
+# download the gpg app
+wget $dmg_url
+
+# the first step is to mount (or attach) the disk image
+# from the command line, use:
+hdiutil mount "$dmg_name"
+
+
+# open the package installer UI..
+# open "$pkg_path"
+
+# run the package installer from command line
+sudo installer -dumplog -package "$pkg_path" -target "$target_volume"
+
+# delete some shit we don't need..
+sudo rm -rf "/usr/local/MacGPG2/libexec/MacGPG2_Updater.app"
+
+hdiutil unmount "$volume_path"
+rm -rf "$dmg_name"
+cd -
+
+# fix that shitty `sudo` call
+sudo chown -R `whoami` "/Users/`whoami`/.gnupg/"
+sudo chown -R `whoami` "/usr/local/MacGPG2/"
+
+
+# installed files:
+# /usr/local/bin/gpg
+# /usr/local/MacGPG
+
+# framework installed:
+# /Library/Frameworks/Libmacgpg.framework
+
+# launch agents installed:
+# "/Library/LaunchAgents/org.gpgtools.Libmacgpg.xpc.plist"
+# "/Library/LaunchAgents/org.gpgtools.gpgmail.enable-bundles.plist"
+# "/Library/LaunchAgents/org.gpgtools.gpgmail.patch-uuid-user.plist"
+# "/Library/LaunchAgents/org.gpgtools.macgpg2.fix.plist"
+# "/Library/LaunchAgents/org.gpgtools.macgpg2.shutdown-gpg-agent.plist"
+# "/Library/LaunchAgents/org.gpgtools.macgpg2.updater.plist"
+
+# launch daemons:
+# /Library/LaunchDaemons/org.gpgtools.gpgmail.patch-uuid.plist
